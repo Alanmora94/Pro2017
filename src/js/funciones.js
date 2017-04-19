@@ -227,6 +227,7 @@ var pagina = "admin.php";
 
 
 
+
 function Ejecutar(aux){
 
 var contador = $("#contador").val()
@@ -333,6 +334,36 @@ var pagina = "admin.php";
 	 $("#Lmysql").prop('checked',false);
 	CargarGrilla();*/
 
+	})
+	.fail(function (a, b, c){
+		alert(a.responseText + "  " + b + "  " + c);
+	});
+
+}
+
+//*****************************************************************
+
+function Logeo(){
+
+var user = $("#user").val();
+var password = $("#password").val();
+
+var pagina = "admin.php";
+
+		$.ajax({
+		type: 'POST',
+		url: pagina,
+		dataType: 'json',
+		data:{usuario : user,
+			  password: password}
+	})
+	.done(function (resultado){
+		if (!resultado) {
+			alert("Error al borrar registro/s...");
+		}else{
+			alert("registro/s borrado/s...");
+			CargarGrilla();
+		}
 	})
 	.fail(function (a, b, c){
 		alert(a.responseText + "  " + b + "  " + c);
